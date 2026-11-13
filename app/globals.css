@@ -59,8 +59,29 @@ body {
   backdrop-filter: blur(6px);
 }
 
+.dial-pill {
+  position: fixed;
+  top: 56px;
+  right: clamp(16px, 3vw, 40px);
+  z-index: 40;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #e9d5ff;
+  border: 1px solid rgba(167, 139, 250, 0.55);
+  border-radius: 20px;
+  padding: 7px 15px;
+  background: rgba(124, 58, 237, 0.18);
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+  box-shadow: 0 0 16px rgba(167, 139, 250, 0.25);
+}
+.dial-pill:hover { background: rgba(124, 58, 237, 0.3); }
+
 /* Small screens: the panel shrinks so it never covers the orb's middle. */
 @media (max-width: 700px) {
   .mira-overview { width: 100%; }
   .repo-pill { top: auto; bottom: 16px; right: 16px; }
+  .dial-pill { top: auto; bottom: 16px; right: auto; left: 16px; }
 }

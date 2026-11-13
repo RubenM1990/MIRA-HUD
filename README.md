@@ -10,6 +10,7 @@ An animated **violet AI-agent HUD**, the interface of MIRA, the second voice of
 
 Tap the orb to cycle her state (standby → listening → processing → speaking). A simulated voice
 drives the ring, the lines, the field and the equalizer, the same way a real voice does.
+Press **Design dial** (top right) to change every number of the look live with sliders.
 The ring and status bar are **hand-written SVG / CSS**; the field is one fragment shader; the
 particle core and the orbiting light lines are a small `react-three-fiber` scene (skipped under
 `prefers-reduced-motion`); and the WebGL wave backdrop + the overview lamp panel are
@@ -40,6 +41,7 @@ Then `npm run build` for a production build, or deploy to Vercel in one click.
 | `MiraCore3D` | The particle core, plus the far waves and the glow pass (`react-three-fiber` + bloom) |
 | `MiraCoreMatter` | The thin light lines orbiting the ring, with smoke and star dust |
 | `MiraStatusBar` | The equalizer + state label at the bottom |
+| `MiraDial` | The Design dial panel: every number of the look as a slider, kept in the browser |
 | `ShaderBackground` | Animated WebGL wave backdrop, tinted violet (MIT component from 21st.dev, see CREDITS) |
 | `MiraOverviewPanel` | Top-left HUD: clock, the visitor's weather, "On this day", social links |
 | `lib/miraStage` | Turns the look on/off and holds the per-frame values every layer reads |
@@ -49,7 +51,8 @@ Then `npm run build` for a production build, or deploy to Vercel in one click.
 
 ## Customise
 
-- **The look** → change the `def` numbers in `lib/miraDial.js` (line count, glow, smoke, dust, ring size, far waves, bloom).
+- **The look, live** → press **Design dial**. 40 sliders in 9 groups (centre lines, smoke, star dust, ring and centre light, her voice, far waves, floating particles, background, glow). Moves are kept in your browser; double-click a slider to send it back; **TRY HER STATE** previews talking and listening.
+- **Ship your own look** → press **COPY MY NUMBERS**, then put those values in the `def` column of `lib/miraDial.js`. **LOAD NUMBERS** pastes a set back in.
 - **Social links** → edit `TILES` in `components/MiraOverviewPanel.tsx`.
 - **Weather** → auto-detects the **visitor's** city on Vercel (geo headers); off Vercel it shows "your town".
 - **A real voice** → call `setVoiceEnergy('output' | 'input', 0..1)` from `lib/voiceEnergy.js` every frame and set the state in `MiraWorld`.

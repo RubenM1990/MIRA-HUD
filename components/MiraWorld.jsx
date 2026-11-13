@@ -8,6 +8,7 @@
 // drives the ring, lines, field and equalizer exactly as a real voice would.
 // To wire a real voice, call setVoiceEnergy('output' | 'input', 0..1) every frame
 // and set the state yourself.
+// The Design dial button opens MiraDial: every number of the look as a slider.
 
 import { useEffect, useRef, useState } from "react";
 import ShaderBackground from "./ShaderBackground";
@@ -15,6 +16,7 @@ import MiraField from "./MiraField";
 import MiraRing from "./MiraRing";
 import MiraCore3D from "./MiraCore3D";
 import MiraStatusBar from "./MiraStatusBar";
+import MiraDial from "./MiraDial";
 import { enterMira, tickMiraVoice } from "../lib/miraStage";
 import { setVoiceEnergy, getVoiceEnergy } from "../lib/voiceEnergy";
 import "./mira-ring.css";
@@ -33,6 +35,7 @@ function fakeVoice(t, seed) {
 export default function MiraWorld() {
   const [state, setState] = useState("idle");
   const [reducedMotion, setReducedMotion] = useState(false);
+  const [dialOpen, setDialOpen] = useState(false);
   const stateRef = useRef(state);
   stateRef.current = state;
 
@@ -100,6 +103,10 @@ export default function MiraWorld() {
         title="Tap to change her state"
         className="mira-tap"
       />
+
+      {dialOpen
+        ? <MiraDial onClose={() => setDialOpen(false)} />
+        : <button type="button" className="dial-pill" onClick={() => setDialOpen(true)} aria-label="Open the design dial">Design dial</button>}
     </>
   );
 }
