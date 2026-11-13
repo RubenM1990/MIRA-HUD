@@ -21,6 +21,11 @@ particle core and the orbiting light lines are a small `react-three-fiber` scene
 > `three` / `@react-three/fiber` / `@react-three/postprocessing` (the 3D core and lines),
 > all MIT-licensed.
 
+## Live demo
+
+**[mira-hud.vercel.app](https://mira-hud.vercel.app)** - the same code, running.
+Tap the orb, then open the Design dial.
+
 ## Run it yourself
 
 ```bash
