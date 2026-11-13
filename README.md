@@ -56,7 +56,7 @@ Then `npm run build` for a production build, or deploy to Vercel in one click.
 
 ## Customise
 
-- **The look, live** → press **Design dial**. 40 sliders in 9 groups (centre lines, smoke, star dust, ring and centre light, her voice, far waves, floating particles, background, glow). Moves are kept in your browser; double-click a slider to send it back; **TRY HER STATE** previews talking and listening.
+- **The look, live** → press **Design dial**. 40 sliders in 9 groups (centre lines, smoke, star dust, ring and centre light, her voice, far waves, floating particles, background, glow). Moves are kept in your browser; double-click a slider to send it back; **HER STATE** switches her between standby, listening, processing and speaking while you tune.
 - **Ship your own look** → press **COPY MY NUMBERS**, then put those values in the `def` column of `lib/miraDial.js`. **LOAD NUMBERS** pastes a set back in.
 - **Social links** → edit `TILES` in `components/MiraOverviewPanel.tsx`.
 - **Weather** → auto-detects the **visitor's** city on Vercel (geo headers); off Vercel it shows "your town".

@@ -78,23 +78,23 @@ export default function MiraWorld() {
         background: "radial-gradient(ellipse 80% 70% at 50% 46%, #0d0718 0%, #06030d 55%, #030108 100%)",
       }} />
 
-      <ShaderBackground opacity={0.12} voiceActive={state === "speaking" || state === "listening"} visualState={state} />
+      <ShaderBackground opacity={0.12} voiceActive={state === "speaking" || state === "listening"} />
 
       {!reducedMotion && <MiraField state={state} />}
 
       <div style={{ position: "fixed", inset: 0, zIndex: 15, pointerEvents: "none" }}>
         <div data-mira-orb style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", pointerEvents: "none" }}>
-          <MiraRing state={state} variant="frame" miraDesign />
+          <MiraRing state={state} />
         </div>
       </div>
 
       {!reducedMotion && (
         <div style={{ position: "fixed", inset: 0, zIndex: 15, pointerEvents: "none" }}>
-          <MiraCore3D state="idle" variant="particles" />
+          <MiraCore3D state="idle" />
         </div>
       )}
 
-      <MiraStatusBar state={state} mira />
+      <MiraStatusBar state={state} />
 
       <button
         type="button"
@@ -105,7 +105,7 @@ export default function MiraWorld() {
       />
 
       {dialOpen
-        ? <MiraDial onClose={() => setDialOpen(false)} />
+        ? <MiraDial onClose={() => setDialOpen(false)} state={state} onState={setState} />
         : <button type="button" className="dial-pill" onClick={() => setDialOpen(true)} aria-label="Open the design dial">Design dial</button>}
     </>
   );

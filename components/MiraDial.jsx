@@ -4,39 +4,23 @@
 // full set between browsers; to ship your own look, paste your numbers into the `def` column.
 import { useEffect, useMemo, useRef, useState } from "react";
 import { DIALS, dial, setDial, resetDials, changedDials, exportDials, importDials, subscribeDials } from "../lib/miraDial";
-import { forceMiraVoice } from "../lib/miraStage";
 
 const V = "#a78bfa", V2 = "#e9d5ff", DIM = "rgba(221,214,254,0.55)";
 const MONO = "'Share Tech Mono', monospace", HEAD = "'Space Grotesk', sans-serif";
 const fmt = (d, v) => (d.step >= 1 ? String(Math.round(v)) : v.toFixed(d.step >= 0.1 ? 1 : 2));
 
-export default function MiraDial({ onClose }) {
+// state / onState: her real state, the same one tapping the orb changes.
+const STATES = [["idle", "standby"], ["listening", "listening"], ["thinking", "processing"], ["speaking", "speaking"]];
+
+export default function MiraDial({ onClose, state, onState }) {
   const [, bump] = useState(0);
   const [side, setSide] = useState(() => { try { return localStorage.getItem("mira_hud_dial_side") || "left"; } catch (_) { return "left"; } });
   const [open, setOpen] = useState({ "Centre lines": true });
-  const [test, setTest] = useState("off");
   const [note, setNote] = useState("");
   const [pasteOpen, setPasteOpen] = useState(false);
   const pasteRef = useRef(null);
   useEffect(() => subscribeDials(() => bump((n) => n + 1)), []);
   useEffect(() => { try { localStorage.setItem("mira_hud_dial_side", side); } catch (_) {} }, [side]);
-
-  // Preview her talking or listening look from inside the panel.
-  useEffect(() => {
-    if (test === "off") { forceMiraVoice(null); return; }
-    if (test === "listen") { forceMiraVoice({ voice: 0, talk: 0, listen: 1 }); return () => forceMiraVoice(null); }
-    let raf = 0;
-    const t0 = performance.now();
-    const loop = () => {
-      const t = (performance.now() - t0) / 1000;
-      const phrase = Math.sin(t * 0.9) > -0.55 ? 1 : 0;
-      const syl = Math.pow(Math.max(0, Math.sin(t * 12.5)), 2) * (0.55 + 0.45 * Math.sin(t * 2.1 + 1.0));
-      forceMiraVoice({ voice: phrase * Math.max(0, syl), talk: phrase ? 1 : 0.4, listen: 0 });
-      raf = requestAnimationFrame(loop);
-    };
-    raf = requestAnimationFrame(loop);
-    return () => { cancelAnimationFrame(raf); forceMiraVoice(null); };
-  }, [test]);
 
   const groups = useMemo(() => {
     const m = new Map();
@@ -80,9 +64,9 @@ export default function MiraDial({ onClose }) {
       </div>
 
       <div style={{ padding: "8px 12px", borderBottom: "1px solid rgba(167,139,250,0.14)", display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
-        <span style={{ fontFamily: MONO, fontSize: 10.5, color: DIM, letterSpacing: 1 }}>TRY HER STATE</span>
-        {[["off", "quiet"], ["talk", "talking"], ["listen", "listening"]].map(([k, l]) => (
-          <button key={k} style={btn(test === k)} onClick={() => setTest(k)}>{l}</button>
+        <span style={{ fontFamily: MONO, fontSize: 10.5, color: DIM, letterSpacing: 1 }}>HER STATE</span>
+        {STATES.map(([k, l]) => (
+          <button key={k} aria-pressed={state === k} style={btn(state === k)} onClick={() => onState(k)}>{l}</button>
         ))}
       </div>
 

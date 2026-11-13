@@ -54,7 +54,10 @@ body {
   text-decoration: none;
   border: 1px solid rgba(167, 139, 250, 0.3);
   border-radius: 20px;
-  padding: 7px 15px;
+  padding: 7px 0;
+  width: 190px;
+  box-sizing: border-box;
+  text-align: center;
   background: rgba(6, 3, 13, 0.5);
   backdrop-filter: blur(6px);
 }
@@ -71,7 +74,10 @@ body {
   color: #e9d5ff;
   border: 1px solid rgba(167, 139, 250, 0.55);
   border-radius: 20px;
-  padding: 7px 15px;
+  padding: 7px 0;
+  width: 190px;
+  box-sizing: border-box;
+  text-align: center;
   background: rgba(124, 58, 237, 0.18);
   backdrop-filter: blur(6px);
   cursor: pointer;

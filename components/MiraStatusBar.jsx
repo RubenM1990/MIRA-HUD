@@ -1,18 +1,14 @@
 // The equalizer + state label along the bottom of the screen.
 import LiveWaveform from "./LiveWaveform";
-const GOLD = "#f5a623";
-const GOLD_BRIGHT = "#ffd080";
 const VIO = "#c084fc";
 const VIO_BRIGHT = "#ede9fe";
 function MiraStatusBar({
-  state = "idle",
-  mira = true,
-  onStop
+  state = "idle"
 }) {
   const W = 420,
     H = 130;
-  const A = mira ? VIO : GOLD,
-    B = mira ? VIO_BRIGHT : GOLD_BRIGHT;
+  const A = VIO,
+    B = VIO_BRIGHT;
   const cx = W / 2,
     cy = 48;
   const isActive = state !== "idle";
@@ -60,18 +56,6 @@ function MiraStatusBar({
         
         {!isActive && <text x={cx} y={cy + 80} textAnchor="middle" fill={A} fontSize="9" fontFamily="'Share Tech Mono', monospace" letterSpacing="0.14em" opacity="0.32">{"TAP THE ORB TO CHANGE HER STATE"}</text>}
       </svg>
-      {state === "speaking" && onStop && <button type="button" aria-label="Stop speaking" title="Tap to stop" onPointerDown={onStop} style={{
-      position: "absolute",
-      left: "calc(50% - 24px)",
-      top: 24,
-      width: 48,
-      height: 48,
-      border: 0,
-      borderRadius: "50%",
-      background: "transparent",
-      pointerEvents: "auto",
-      cursor: "pointer"
-    }} />}
     </div>;
 }
 export { MiraStatusBar as default };
