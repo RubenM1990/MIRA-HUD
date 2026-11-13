@@ -1,0 +1,192 @@
+/* Ring + status-bar animations, and MIRA's colour overrides (data-mira on <html>). */
+@keyframes dotBlink { 0%,100%{opacity:0.2} 50%{opacity:1} }
+.orb-dot-blink { animation: dotBlink 1.2s ease-in-out infinite; }
+.blink-0 { animation-delay: 0s; }
+.blink-1 { animation-delay: 0.4s; }
+.blink-2 { animation-delay: 0.8s; }
+
+/* ── Sound waves — always on ── */
+@keyframes soundWave {
+  0%   { r: var(--front-orb-radius, 155px); opacity: 0.18; stroke-width: 0.8; }
+  60%  { opacity: 0.06; }
+  100% { r: 230; opacity: 0; stroke-width: 0.3; }
+}
+@keyframes soundWaveActive {
+  0%   { r: var(--front-orb-radius, 155px); opacity: 0.55; stroke-width: 1.5; }
+  60%  { opacity: 0.2; }
+  100% { r: 245; opacity: 0; stroke-width: 0.5; }
+}
+.sound-wave { animation: soundWave 3.5s ease-out infinite; }
+.wave-0 { animation-delay: 0s; }
+.wave-1 { animation-delay: 0.9s; }
+.wave-2 { animation-delay: 1.8s; }
+.wave-3 { animation-delay: 2.7s; }
+
+.mira-ring-wrap[data-state="speaking"] .sound-wave,
+.mira-ring-wrap[data-state="thinking"] .sound-wave {
+  animation-name: soundWaveActive;
+  animation-duration: 2s;
+}
+
+/* Ring breathe — always */
+@keyframes ringBreathe {
+  0%,100% { opacity: 0.9; }
+  50%      { opacity: 1; }
+}
+.orb-ring-breathe { animation: ringBreathe 3s ease-in-out infinite; }
+.orb-ring-glow    { animation: ringBreathe 3s ease-in-out infinite; }
+.orb-ring-bright  { animation: ringBreathe 2s ease-in-out infinite; }
+
+/* Center ring slow pulse */
+@keyframes centerRingPulse {
+  0%,100% { opacity: 0.7; }
+  50%      { opacity: 1; }
+}
+.orb-center-ring { animation: centerRingPulse 2.5s ease-in-out infinite; }
+
+/* ── Orb animations ── */
+
+@keyframes orbRotateCW {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes orbRotateCCW {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(-360deg); }
+}
+@keyframes orbPulse {
+  0%, 100% { opacity: 0.7; r: 48; }
+  50%       { opacity: 1;   r: 52; }
+}
+@keyframes orbPulseFast {
+  0%, 100% { opacity: 0.8; r: 46; }
+  50%       { opacity: 1;   r: 54; }
+}
+@keyframes orbCenterBlink {
+  0%, 100% { opacity: 0.9; }
+  50%       { opacity: 1; }
+}
+@keyframes orbAmbient {
+  0%, 100% { opacity: 0.15; transform: scale(1); }
+  50%       { opacity: 0.25; transform: scale(1.05); }
+}
+@keyframes orbRipple {
+  0%   { r: 110; opacity: 0.6; }
+  100% { r: 145; opacity: 0; }
+}
+@keyframes orbDotOrbit {
+  from { transform: rotate(0deg) translateX(40px) rotate(0deg); }
+  to   { transform: rotate(360deg) translateX(40px) rotate(-360deg); }
+}
+@keyframes orbDotOrbit2 {
+  from { transform: rotate(120deg) translateX(32px) rotate(-120deg); }
+  to   { transform: rotate(480deg) translateX(32px) rotate(-480deg); }
+}
+@keyframes orbDotOrbit3 {
+  from { transform: rotate(240deg) translateX(28px) rotate(-240deg); }
+  to   { transform: rotate(600deg) translateX(28px) rotate(-600deg); }
+}
+@keyframes dashMove {
+  from { stroke-dashoffset: 0; }
+  to   { stroke-dashoffset: -24; }
+}
+@keyframes agentPulse {
+  0%, 100% { transform: scale(1); opacity: 0.2; }
+  50%       { transform: scale(1.5); opacity: 0.1; }
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0.5; }
+  50%       { opacity: 1; }
+}
+
+/* Orb ring classes */
+.orb-ring-slow  { transform-origin: 140px 140px; animation: orbRotateCW  18s linear infinite; }
+.orb-ring-medium{ transform-origin: 140px 140px; animation: orbRotateCCW 12s linear infinite; }
+.orb-ring-fast  { transform-origin: 140px 140px; animation: orbRotateCW   7s linear infinite; }
+.orb-orbit-cw   { transform-origin: 140px 140px; animation: orbRotateCW   5s linear infinite; }
+.orb-orbit-ccw  { transform-origin: 140px 140px; animation: orbRotateCCW  3s linear infinite; }
+
+.orb-core-pulse { animation: orbPulse 3s ease-in-out infinite; }
+.orb-center     { animation: orbCenterBlink 2s ease-in-out infinite; }
+.orb-ambient    { transform-origin: 140px 140px; animation: orbAmbient 4s ease-in-out infinite; }
+
+/* Ripples */
+.orb-ripple     { transform-origin: 140px 140px; animation: orbRipple 2.4s ease-out infinite; }
+.ripple-1       { animation-delay: 0s; }
+.ripple-2       { animation-delay: 0.8s; }
+.ripple-3       { animation-delay: 1.6s; }
+
+/* Thinking dots */
+.orb-dot-orbit  { transform-origin: 140px 140px; animation: orbDotOrbit  2s linear infinite; }
+.orb-dot-orbit2 { transform-origin: 140px 140px; animation: orbDotOrbit2 2.5s linear infinite; }
+.orb-dot-orbit3 { transform-origin: 140px 140px; animation: orbDotOrbit3 3s linear infinite; }
+
+/* Connection line */
+.connection-line-anim { animation: dashMove 0.8s linear infinite; }
+
+@keyframes listeningGrow {
+  /* 0–25%: smooth grow from idle scale (1) to full listening size */
+  0%   { transform: scale(1.0); }
+  25%  { transform: scale(1.2); }
+  /* 25–100%: gentle pulse once at full size */
+  62%  { transform: scale(1.15); }
+  100% { transform: scale(1.2); }
+}
+@keyframes listeningPulse {
+  0%,100% { transform: scale(1.2); }
+  50%     { transform: scale(1.14); }
+}
+@keyframes listeningRing {
+  0%   { r: var(--front-orb-radius, 155px); opacity: 0.7; stroke-width: 2; }
+  60%  { opacity: 0.25; }
+  100% { r: 280; opacity: 0; stroke-width: 0.5; }
+}
+.mira-ring-wrap[data-state="listening"] {
+  /* grow-in (1s) then hand off to steady pulse */
+  animation: listeningGrow 1s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+             listeningPulse 2.4s ease-in-out 1s infinite;
+  transform-origin: center;
+}
+.mira-ring-wrap[data-state="listening"] .sound-wave {
+  animation-name: listeningRing;
+  animation-duration: 1.6s;
+}
+.mira-ring-wrap[data-state="listening"] .orb-ring-breathe {
+  animation: ringBreathe 1s ease-in-out infinite;
+}
+.mira-ring-wrap[data-state="listening"] .orb-ring-glow {
+  animation: ringBreathe 0.8s ease-in-out infinite;
+}
+
+/* ── Faster pulse when thinking */
+.mira-ring-wrap[data-state="thinking"] .orb-core-pulse {
+  animation: orbPulseFast 1s ease-in-out infinite;
+}
+.mira-ring-wrap[data-state="thinking"] .orb-ring-slow {
+  animation-duration: 6s;
+}
+.mira-ring-wrap[data-state="thinking"] .orb-ring-medium {
+  animation-duration: 4s;
+}
+
+/* Bigger glow when speaking */
+.mira-ring-wrap[data-state="speaking"] .orb-ambient {
+  animation: orbAmbient 1s ease-in-out infinite;
+  opacity: 0.35;
+}
+
+
+:root[data-mira="1"] {
+  --accent: #a78bfa;
+  --glass-border: rgba(167,139,250,0.22);
+  --gold-glow: rgba(167,139,250,0.10);
+}
+:root[data-mira="1"] .mira-ring-wrap { filter: drop-shadow(0 0 26px rgba(167,139,250,0.35)); }
+:root[data-mira="1"]:not([data-mira-listen-waves]) .mira-ring-wrap[data-state="listening"] .sound-wave {
+  animation-name: soundWave;
+  animation-duration: 3.5s;
+}

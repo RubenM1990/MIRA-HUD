@@ -1,0 +1,66 @@
+:root {
+  --font-ui: "Space Grotesk", system-ui, sans-serif;
+  --font-mono: "Share Tech Mono", ui-monospace, Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; }
+
+body {
+  background: #030108;
+  color: #f0ede8;
+  font-family: var(--font-ui);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+/* Overview lamp panel: pinned to the top-left, out of document flow. */
+.mira-overview {
+  position: fixed;
+  top: 10px;
+  left: 0;
+  width: 540px;
+  max-width: 92vw;
+  z-index: 30;
+}
+
+/* The invisible button over the ring: tap the orb to change MIRA's state. */
+.mira-tap {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  width: 330px;
+  height: 330px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  z-index: 20;
+}
+.mira-tap:focus-visible { outline: 2px solid #c4b5fd; outline-offset: 6px; }
+
+.repo-pill {
+  position: fixed;
+  top: 16px;
+  right: clamp(16px, 3vw, 40px);
+  z-index: 40;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(240, 237, 232, 0.7);
+  text-decoration: none;
+  border: 1px solid rgba(167, 139, 250, 0.3);
+  border-radius: 20px;
+  padding: 7px 15px;
+  background: rgba(6, 3, 13, 0.5);
+  backdrop-filter: blur(6px);
+}
+
+/* Small screens: the panel shrinks so it never covers the orb's middle. */
+@media (max-width: 700px) {
+  .mira-overview { width: 100%; }
+  .repo-pill { top: auto; bottom: 16px; right: 16px; }
+}

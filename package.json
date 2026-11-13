@@ -1,0 +1,27 @@
+{
+  "name": "mira-ui",
+  "version": "1.0.0",
+  "description": "MIRA's HUD: a violet AI-agent interface with a living field, orbiting light lines and a particle core.",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@react-three/fiber": "^8.17.10",
+    "@react-three/postprocessing": "^2.16.3",
+    "lucide-react": "^0.511.0",
+    "next": "^14.2.32",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "three": "^0.169.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "typescript": "^5"
+  }
+}
