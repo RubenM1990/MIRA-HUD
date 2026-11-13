@@ -12,7 +12,7 @@ export default function Home() {
 
       {/* Repo link - remove or replace for your own use */}
       <a
-        href="https://github.com/RubenM1990/MIRA-UI"
+        href="https://github.com/RubenM1990/MIRA-HUD"
         target="_blank"
         rel="noopener noreferrer"
         className="repo-pill"

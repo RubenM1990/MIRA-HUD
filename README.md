@@ -1,17 +1,24 @@
-# MIRA-UI
+# MIRA-HUD
 
-The **HUD of MIRA**, the second voice of [Apex](https://reznikov-engineering.com/apex), released
-open source: a violet AI-agent interface with a living field, thin light lines orbiting the ring
-on wandering paths, star dust, and a particle core.
+> ⚠ **This is the HUD only. The MIRA Humanoid is NOT part of this repo.**
+> The particle-figure face of MIRA (assembly, states, voice-driven energy) lives in a separate
+> repository with its own access. What you get here is the interface around her: the field,
+> the ring, the light lines, the particle core and the status bar.
 
-Tap the orb to change her state (standby → listening → processing → speaking). A simulated voice
+An animated **violet AI-agent HUD**, the interface of MIRA, the second voice of
+[Apex](https://reznikov-engineering.com/apex), released open source.
+
+Tap the orb to cycle her state (standby → listening → processing → speaking). A simulated voice
 drives the ring, the lines, the field and the equalizer, the same way a real voice does.
+The ring and status bar are **hand-written SVG / CSS**; the field is one fragment shader; the
+particle core and the orbiting light lines are a small `react-three-fiber` scene (skipped under
+`prefers-reduced-motion`); and the WebGL wave backdrop + the overview lamp panel are
+**MIT community components from [21st.dev](https://21st.dev/community/components)**
+(see [CREDITS](./CREDITS.md)).
 
-> ⚠ **The MIRA Humanoid is NOT part of this repo.** Her particle-figure face lives in a separate
-> repository with its own access. What you see here is the HUD only.
-
-> Built with Next.js 14 + React 18. Runtime deps: `three`, `@react-three/fiber`,
-> `@react-three/postprocessing` (the 3D core and lines) and `lucide-react` (icons), all MIT.
+> Built with Next.js 14 + React 18. Runtime deps: `lucide-react` (icons) and
+> `three` / `@react-three/fiber` / `@react-three/postprocessing` (the 3D core and lines),
+> all MIT-licensed.
 
 ## Run it yourself
 
@@ -44,7 +51,7 @@ Then `npm run build` for a production build, or deploy to Vercel in one click.
 
 - **The look** → change the `def` numbers in `lib/miraDial.js` (line count, glow, smoke, dust, ring size, far waves, bloom).
 - **Social links** → edit `TILES` in `components/MiraOverviewPanel.tsx`.
-- **Weather** → auto-detects the visitor's city on Vercel; off Vercel it shows "your town".
+- **Weather** → auto-detects the **visitor's** city on Vercel (geo headers); off Vercel it shows "your town".
 - **A real voice** → call `setVoiceEnergy('output' | 'input', 0..1)` from `lib/voiceEnergy.js` every frame and set the state in `MiraWorld`.
 - **Debug views** → add `?mira_debug=orb|mask|breakup|near|hot|nearhot|core|corehot` to the URL to see each layer alone.
 
@@ -55,12 +62,17 @@ under `prefers-reduced-motion` (the ring and status bar remain).
 
 ## Not included (on purpose)
 
-This repo is the **UI only**: no voice call, no AI brain, no accounts and no keys. It talks to
-nothing except its own two small routes (weather and "on this day").
+This repo is the **HUD only**. It does **not** include:
+
+- **The MIRA Humanoid** - her particle-figure face is a separate product with its own access.
+- **The voice call** - the production MIRA talks over a live speech connection; here a simulated
+  voice level stands in, so the HUD stays fully animated without it.
+- **The AI brain, accounts and keys** - this repo talks to nothing except its own two small
+  routes (weather and "on this day").
 
 ## License
 
-Code is released under the **[MIT License](./LICENSE)**.
+Code is released under the **[MIT License](./LICENSE)** - use it, fork it, ship it.
 
 The **names "MIRA" and "Apex" and the Reznikov Engineering branding are not part of this license.**
 If you build on this, please use your own product name and branding.

@@ -15,7 +15,7 @@ export async function GET() {
   const dd = String(now.getUTCDate()).padStart(2, "0");
   try {
     const r = await fetch(`https://api.wikimedia.org/feed/v1/wikipedia/en/onthisday/selected/${mm}/${dd}`, {
-      headers: { "User-Agent": "mira-ui (open-source demo)" },
+      headers: { "User-Agent": "mira-hud (open-source demo)" },
       next: { revalidate: 21600 },
     });
     const d = await r.json();

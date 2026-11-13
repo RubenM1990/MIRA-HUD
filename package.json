@@ -1,5 +1,5 @@
 {
-  "name": "mira-ui",
+  "name": "mira-hud",
   "version": "1.0.0",
   "description": "MIRA's HUD: a violet AI-agent interface with a living field, orbiting light lines and a particle core.",
   "license": "MIT",
