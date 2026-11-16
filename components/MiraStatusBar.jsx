@@ -13,7 +13,7 @@ function MiraStatusBar({
     cy = 48;
   const isActive = state !== "idle";
   const label = state === "listening" ? "LISTENING" : state === "speaking" ? "SPEAKING" : state === "thinking" ? "PROCESSING" : "STANDBY";
-  return <div style={{
+  return <div className="mira-status" style={{
     position: "fixed",
     left: 0,
     right: 0,

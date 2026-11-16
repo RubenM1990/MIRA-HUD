@@ -10,6 +10,9 @@ An animated **violet AI-agent HUD**, the interface of MIRA, the second voice of
 
 Tap the orb to cycle her state (standby → listening → processing → speaking). A simulated voice
 drives the ring, the lines, the field and the equalizer, the same way a real voice does.
+While she is **listening**, your own microphone drives her (the browser asks first; nothing is
+recorded or sent anywhere, and the mic turns off when she stops listening). If you say no, the
+simulated voice is used.
 Press **Design dial** (top right) to change every number of the look live with sliders.
 The ring and status bar are **hand-written SVG / CSS**; the field is one fragment shader; the
 particle core and the orbiting light lines are a small `react-three-fiber` scene (skipped under

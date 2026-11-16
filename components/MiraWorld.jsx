@@ -6,6 +6,7 @@
 // There is no voice call in this repo. Tapping the orb cycles her state
 // (standby -> listening -> processing -> speaking) and a simulated voice level
 // drives the ring, lines, field and equalizer exactly as a real voice would.
+// While listening, the visitor's real microphone drives it (falls back to the demo voice if refused).
 // To wire a real voice, call setVoiceEnergy('output' | 'input', 0..1) every frame
 // and set the state yourself.
 // The Design dial button opens MiraDial: every number of the look as a slider.
@@ -19,6 +20,7 @@ import MiraStatusBar from "./MiraStatusBar";
 import MiraDial from "./MiraDial";
 import { enterMira, tickMiraVoice } from "../lib/miraStage";
 import { setVoiceEnergy, getVoiceEnergy } from "../lib/voiceEnergy";
+import { startMic, stopMic, micLevel } from "../lib/micLevel";
 import "./mira-ring.css";
 
 const CYCLE = ["idle", "listening", "thinking", "speaking"];
@@ -61,13 +63,20 @@ export default function MiraWorld() {
       const t = now / 1000;
       const s = stateRef.current;
       setVoiceEnergy("output", s === "speaking" ? fakeVoice(t, 0.3) : 0);
-      setVoiceEnergy("input", s === "listening" ? fakeVoice(t * 0.8, 2.1) * 0.7 : 0);
+      const mic = s === "listening" ? micLevel() : null;
+      setVoiceEnergy("input", s !== "listening" ? 0 : mic != null ? mic : fakeVoice(t * 0.8, 2.1) * 0.7);
       tickMiraVoice(dt, { energy: getVoiceEnergy("output"), speaking: s === "speaking", listening: s === "listening" });
       raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
   }, []);
+
+  // Listening uses the visitor's real microphone (asked on the tap); any other state lets it go.
+  useEffect(() => {
+    if (state === "listening") startMic(); else stopMic();
+  }, [state]);
+  useEffect(() => () => stopMic(), []);
 
   const next = () => setState((s) => CYCLE[(CYCLE.indexOf(s) + 1) % CYCLE.length]);
 
@@ -84,7 +93,7 @@ export default function MiraWorld() {
 
       <div style={{ position: "fixed", inset: 0, zIndex: 15, pointerEvents: "none" }}>
         <div data-mira-orb style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", pointerEvents: "none" }}>
-          <MiraRing state={state} />
+          <div className="mira-orb-scale"><MiraRing state={state} /></div>
         </div>
       </div>
 
